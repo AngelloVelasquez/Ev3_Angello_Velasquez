@@ -15,16 +15,16 @@ def ejercicio1():
 
     if request.method == 'POST':
         # Se ingresan datos en formato decimal y son guardados.
-        n1 = float(request.form['nota1'])
-        n2 = float(request.form['nota2'])
-        n3 = float(request.form['nota3'])
-        asis = float(request.form['asistencia'])
+        nota1 = float(request.form['nota1'])
+        nota2 = float(request.form['nota2'])
+        nota3 = float(request.form['nota3'])
+        asistencia = float(request.form['asistencia'])
 
-        # Formula
-        promedio = (n1 + n2 + n3) / 3
+        # Formula matematica calculo de promedio
+        promedio = (nota1 + nota2 + nota3) / 3
 
-        # variable condicional
-        if promedio >= 40 and asis >= 75:
+        # variable condicional si el promedio es >4 o no.
+        if promedio >= 40 and asistencia >= 75:
             estado = "APROBADO"
         else:
             estado = "REPROBADO"
@@ -38,17 +38,17 @@ def ejercicio2():
     largo = 0
 
     if request.method == 'POST':
-        nom1 = request.form['nombre1']
-        nom2 = request.form['nombre2']
-        nom3 = request.form['nombre3']
+        nombre1 = request.form['nombre1']
+        nombre2 = request.form['nombre2']
+        nombre3 = request.form['nombre3']
 
         # Busqueda de la palabra mas larga
-        if len(nom1) >= len(nom2) and len(nom1) >= len(nom3):
-            mayor = nom1
-        elif len(nom2) >= len(nom1) and len(nom2) >= len(nom3):
-            mayor = nom2
+        if len(nombre1) >= len(nombre2) and len(nombre1) >= len(nombre3):
+            mayor = nombre1
+        elif len(nombre2) >= len(nombre1) and len(nombre2) >= len(nombre3):
+            mayor = nombre2
         else:
-            mayor = nom3
+            mayor = nombre3
 
         largo = len(mayor)
 
