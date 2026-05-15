@@ -10,49 +10,52 @@ def index():
 
 @app.route('/ejercicio1', methods=['GET', 'POST'])
 def ejercicio1():
-    promedio = None
-    estado = ""
+    nombre = ""
+    totalcomprapinturas = 0
+    totalcomprafinal = 0
+    totaldscto= 0
+    descuento = 0
 
     if request.method == 'POST':
-        # Se ingresan datos en formato decimal y son guardados.
-        nota1 = float(request.form['nota1'])
-        nota2 = float(request.form['nota2'])
-        nota3 = float(request.form['nota3'])
-        asistencia = float(request.form['asistencia'])
+        # Se ingresan datos en formato de Enteros y son guardados.
+        nombre = str(request.form['nombre'])
+        edad = int(request.form['edad'])
+        cantidadpinturas = int(request.form['cantidadpinturas'])
 
-        # Formula matematica calculo de promedio
-        promedio = (nota1 + nota2 + nota3) / 3
+        # Formula matematica calculo del total$
+        preciotarropintura = 9000
+        totalcomprapinturas = preciotarropintura * cantidadpinturas
 
-        # variable condicional si el promedio es >4 o no.
-        if promedio >= 40 and asistencia >= 75:
-            estado = "APROBADO"
+        # variable condicional de descuentos.
+        if edad >= 18 and edad <= 30:
+            descuento = 0.15
+        elif edad > 30:
+            descuento = 0.25
         else:
-            estado = "REPROBADO"
+            descuento = 0
+            print ("no hay descuento")
 
-    return render_template('ejercicio1.html', prom=promedio, estado=estado)
+        totaldscto = totalcomprapinturas * descuento
+        totalcomprafinal = totalcomprapinturas - totaldscto
 
-
+    return render_template('ejercicio1.html', nombre=nombre, totalcomprapinturas=totalcomprapinturas, totalcomprafinal=totalcomprafinal, totaldscto=totaldscto, descuento=descuento)
 @app.route('/ejercicio2', methods=['GET', 'POST'])
 def ejercicio2():
-    mayor = ""
-    largo = 0
+    mensaje = ""
 
     if request.method == 'POST':
-        nombre1 = request.form['nombre1']
-        nombre2 = request.form['nombre2']
-        nombre3 = request.form['nombre3']
+        nombreusuario = request.form['nombreusuario']
+        contraseña= request.form['contraseña']
 
-        # Busqueda de la palabra mas larga
-        if len(nombre1) >= len(nombre2) and len(nombre1) >= len(nombre3):
-            mayor = nombre1
-        elif len(nombre2) >= len(nombre1) and len(nombre2) >= len(nombre3):
-            mayor = nombre2
+        # autentificacion de usuario
+        if nombreusuario == "juan" and contraseña =="admin":
+            mensaje = f"Bienvenido Administrador {nombreusuario}"
+        elif nombreusuario == "pepe" and contraseña == "user":
+            mensaje = f"Bienvenido Usuario {nombreusuario}"
         else:
-            mayor = nombre3
+            mensaje = "Usuario o contraseña incorrectos"
 
-        largo = len(mayor)
-
-    return render_template('ejercicio2.html', mayor=mayor, largo=largo)
+    return render_template('ejercicio2.html', mensaje=mensaje)
 
 
 if __name__ == '__main__':

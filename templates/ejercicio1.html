@@ -2,32 +2,31 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 1 - Notas</title>
+    <title>Ejercicio 1 - Descuento compra pintura</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
 </head>
 <body>
     <div class="container">
-        <h2>Formulario de Notas</h2>
+        <h2>Calculo de compras</h2>
         <form action="/ejercicio1" method="POST">
-            <label>Nota 1:</label>
-            <input type="number" name="nota1" min="10" max="70" required><br><br>
+            <label>Ingresa tu nombre:</label>
+            <input type="text" name="nombre" required><br><br>
 
-            <label>Nota 2:</label>
-            <input type="number" name="nota2" min="10" max="70" required><br><br>
+            <label>Ingresa tu edad:</label>
+            <input type="number" name="edad" required><br><br>
 
-            <label>Nota 3:</label>
-            <input type="number" name="nota3" min="10" max="70" required><br><br>
+            <label>Ingresa la cantidad de tarros de pintura a comprar:</label>
+            <input type="number" name="cantidadpinturas" required><br><br>
 
-            <label>Asistencia (%):</label>
-            <input type="number" name="asistencia" min="0" max="100" required><br><br>
-
-            <input type="submit" value="Enviar" class="btn-primary">
+            <input type="submit" value="Calcular" class="btn-primary">
         </form>
 
-        {% if prom %}
-            <div class="resultado">
-                <p>Promedio: {{ prom }}</p>
-                <p>Estado: <strong>{{ estado }}</strong></p>
+        {% if nombre %}
+            <div style ="margin-top:20px; text-align: left;">
+                <p>Nombre del cliente: ${{ nombre }}</p>
+                <p>Total sin descuento: ${{ totalcomprapinturas | int }}</p>
+                <p>El descuento es: ${{ totaldscto | int }}</p>
+                <p>Total a pagar es de: ${{ totalcomprafinal | int }}</p>
             </div>
         {% endif %}
 
